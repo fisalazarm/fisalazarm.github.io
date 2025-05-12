@@ -1,59 +1,54 @@
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #fceabb, #f8b500);
-  color: #333;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   margin: 0;
 }
 
-.card, .letter {
-  background-color: #fff9f0;
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #fff9f0;
   border: 2px solid #f8b500;
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  max-width: 600px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.card:hover, .letter:hover {
-  transform: scale(1.02);
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #f8b500;
+  transform-origin: top;
+  transition: transform 0.5s ease;
+  z-index: 2;
 }
 
-h1 {
-  color: #e65100;
-  font-size: 2rem;
+.envelope.open .flap {
+  transform: rotateX(-180deg);
 }
 
-p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  line-height: 1.5;
+.envelope .letter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.5s;
+  z-index: 1;
 }
 
-button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #f8b500;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #e65100;
-}
-
-.hidden {
-  display: none;
+.envelope.open .letter {
+  opacity: 1;
 }
