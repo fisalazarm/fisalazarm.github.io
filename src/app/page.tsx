@@ -175,10 +175,9 @@ export default function HomePage() {
   }, [pokemons, generation, search, typeSet, typeSet2, sort]);
 
   const paginatedPokemons = useMemo(() => {
-    if (search.length > 0 || generation) return filteredPokemons; // mostrar todos los filtrados
     const start = (page - 1) * limit;
     return filteredPokemons.slice(start, start + limit);
-  }, [filteredPokemons, page, search, generation]);
+  }, [filteredPokemons, page]);
 
   // Prefetch de detalles por página (limitado en concurrencia)
   useEffect(() => {
@@ -374,24 +373,23 @@ export default function HomePage() {
         {paginatedPokemons.map((p) => listCard(p))}
       </ul>
 
-      {!(search.length > 0 || generation || typeFilter || typeFilter2) && (
-        <div className="flex justify-center gap-4 mt-8">
-          <button
-            className="px-4 py-2 rounded bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 disabled:opacity-50"
-            onClick={() => setPage((p) => (p > 1 ? p - 1 : 1))}
-            disabled={page === 1}
-          >
-            Anterior
-          </button>
-          <span className="text-white font-bold">Página {page}</span>
-          <button
-            className="px-4 py-2 rounded bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700"
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Siguiente
-          </button>
-        </div>
-      )}
+      <div className="flex justify-center gap-4 mt-8">
+        <button
+          className="px-4 py-2 rounded bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 disabled:opacity-50"
+          onClick={() => setPage((p) => (p > 1 ? p - 1 : 1))}
+          disabled={page === 1}
+        >
+          Anterior
+        </button>
+        <span className="text-white font-bold">Página {page}</span>
+        <button
+          className="px-4 py-2 rounded bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700"
+          onClick={() => setPage((p) => p < Math.ceil(filteredPokemons.length / limit) ? p + 1 : p)}
+          disabled={page >= Math.ceil(filteredPokemons.length / limit)}
+        >
+          Siguiente
+        </button>
+      </div>
 
       {modalOpen && selected && (
         <div
