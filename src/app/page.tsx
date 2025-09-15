@@ -287,7 +287,19 @@ export default function HomePage() {
     <main className="p-6 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-white mb-6">Pokédex</h1>
 
-      <div className="flex flex-col md:flex-row gap-3 mb-6">
+  <div className="flex flex-col md:flex-row gap-3 mb-6 items-center flex-wrap">
+        <button
+          className="px-4 py-2 rounded bg-neutral-700 border border-neutral-600 text-white hover:bg-neutral-600 text-sm"
+          onClick={() => {
+            setSearch("");
+            setGeneration(null);
+            setTypeFilter("");
+            setTypeFilter2("");
+            setPage(1);
+          }}
+        >
+          Limpiar filtros
+        </button>
         <input
           type="text"
           placeholder="Buscar Pokémon..."
