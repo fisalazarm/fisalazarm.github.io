@@ -363,6 +363,7 @@ export default function HomePage() {
           onChange={(e) => {
             const v = e.target.value as "id-asc" | "id-desc" | "name-asc" | "name-desc";
             setSort(v);
+            setPage(1);
           }}
         >
           <option value="id-asc">Ordenar: ID ascendente</option>
@@ -374,7 +375,7 @@ export default function HomePage() {
         {/* Toggles lista */}
         <div className="flex items-center gap-2">
           <label className="flex items-center gap-1 text-white text-sm">
-            <input type="checkbox" checked={listShiny} onChange={(e) => setListShiny(e.target.checked)} />
+            <input type="checkbox" checked={listShiny} onChange={(e) => { setListShiny(e.target.checked); setPage(1); }} />
             Shiny
           </label>
           {/* Siempre animado: se eliminó el toggle. Hembra se controla en el modal. */}
