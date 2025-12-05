@@ -1,3 +1,15 @@
+/* Animaciones para los botones del Pomodoro */
+.pomodoro-btn {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pomodoro-btn:hover:not(:disabled) {
+  transform: scale(1.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.pomodoro-btn:active:not(:disabled) {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
