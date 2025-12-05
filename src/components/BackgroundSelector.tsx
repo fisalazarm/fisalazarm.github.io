@@ -7,7 +7,12 @@ const backgrounds = [
   { type: "image", src: "/pixel-jeff-sunday-mood.gif", name: "Pixel Jeff - Sunday Mood" },
 ];
 
-export default function BackgroundSelector({ onSelect, selected }) {
+interface BackgroundSelectorProps {
+  onSelect: (background: { type: "image" | "gradient" | "video"; src: string }) => void;
+  selected: { type: "image" | "gradient" | "video"; src: string };
+}
+
+export default function BackgroundSelector({ onSelect, selected }: BackgroundSelectorProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -62,7 +67,7 @@ export default function BackgroundSelector({ onSelect, selected }) {
             <button
               key={bg.src}
               onClick={() => {
-                onSelect(bg);
+                onSelect({ type: bg.type as "image" | "gradient" | "video", src: bg.src });
                 setOpen(false);
               }}
               style={{
